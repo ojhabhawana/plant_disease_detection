@@ -1,5 +1,6 @@
-// import 'package:cropssafe/constants.dart';
+// import 'package:cropssafe/consts/constants.dart';
 // import 'package:cropssafe/screens/login_screen.dart';
+// import 'package:cropssafe/screens/signup_screen.dart';
 // import 'package:flutter/material.dart';
 // import 'package:google_fonts/google_fonts.dart';
 // import 'package:onboarding/onboarding.dart';
@@ -212,10 +213,10 @@
 //           }
 //         },
 //         child: const Padding(
-//           padding: EdgeInsets.all(10),
+//           padding: defaultSkipButtonPadding,
 //           child: Text(
 //             'Skip',
-//             style: TextStyle(color: Colors.white),
+//             style: defaultSkipButtonTextStyle,
 //           ),
 //         ),
 //       ),
@@ -232,7 +233,7 @@
 //            Navigator.pushReplacement(context,
 //                                     MaterialPageRoute(
 //                                   builder: (context) {
-//                                     return LoginScreen();
+//                                     return SignupScreen();
 //                                     }));
 //         },
 //         child: const Padding(
@@ -287,7 +288,7 @@
 //                               lineDesign: LineDesign(
 //                                 lineType: DesignType.line_uniform,
 //                               ),
-//                             ), painter: null,
+//                             ),
 //                           ),
 //                         ),
 //                         index == pagesLength - 1

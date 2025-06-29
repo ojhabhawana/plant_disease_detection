@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:cropssafe/constants.dart';
+import 'package:cropssafe/components/btm_bar.dart';
+import 'package:cropssafe/consts/constants.dart';
 import 'package:cropssafe/screens/landingpage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,11 +24,12 @@ class _SplashscreenState extends State<Splashscreen> {
     Timer(
         Duration(seconds: 5),
         () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) =>  Home_page())));
+            MaterialPageRoute(builder: (context) =>  BottomBarScreen())));
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
+  
       body: Container(
         color: kSpiritedGreen,
         child: Stack(

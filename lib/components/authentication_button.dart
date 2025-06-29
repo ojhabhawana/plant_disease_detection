@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:cropssafe/constants.dart';
+import 'package:cropssafe/consts/constants.dart';
 
 class AuthenticationButton extends StatelessWidget {
   const AuthenticationButton({
@@ -17,7 +17,7 @@ class AuthenticationButton extends StatelessWidget {
     return ElevatedButton(
       style: ButtonStyle(
         padding: MaterialStateProperty.all(
-          const EdgeInsets.symmetric(vertical: 12.0),
+          const EdgeInsets.symmetric(vertical: 1.0),
         ),
         backgroundColor: MaterialStateProperty.all(kDarkGreenColor),
         shape: MaterialStateProperty.all(RoundedRectangleBorder(
