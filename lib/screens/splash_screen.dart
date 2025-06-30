@@ -23,13 +23,12 @@ class _SplashscreenState extends State<Splashscreen> {
     super.initState();
     Timer(
         Duration(seconds: 5),
-        () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) =>  BottomBarScreen())));
+        () => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => LandingPage())));
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
-  
       body: Container(
         color: kSpiritedGreen,
         child: Stack(
@@ -42,7 +41,6 @@ class _SplashscreenState extends State<Splashscreen> {
                 fit: BoxFit.fill,
               ),
             ),
-            
             Column(
               children: [
                 SizedBox(

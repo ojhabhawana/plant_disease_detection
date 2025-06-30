@@ -10,6 +10,8 @@ class GoogleButton extends StatelessWidget {
   const GoogleButton({Key? key}) : super(key: key);
 
   Future<void> _googleSignIn(context) async {
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => BottomBarScreen()));
     // final googleSignIn = GoogleSignIn();
     // final googleAccount = await googleSignIn.signIn();
     // if (googleAccount != null) {
@@ -43,28 +45,20 @@ class GoogleButton extends StatelessWidget {
         onTap: () {
           _googleSignIn(context);
         },
-        child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 60,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
+          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Image.asset(
+              'assets/googleLogo.png',
+              width: 20.0,
             ),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(30.0),
-              ),
-              child: Image.asset(
-                'assets/google.png',
-                width: 37.0,
-              ),
+            const SizedBox(
+              width: 8,
             ),
-          ),
-          const SizedBox(
-            width: 8,
-          ),
-          TextWidget(
-              text: 'Sign in with google', color: Colors.white, textSize: 18)
-        ]),
+            TextWidget(
+                text: 'Sign in with google', color: Colors.white, textSize: 16)
+          ]),
+        ),
       ),
     );
   }

@@ -10,25 +10,29 @@ class ImageSection extends SliverFixedExtentList {
               (BuildContext context, index) {
                 return Center(
                   child: Padding(
-                      padding: const EdgeInsets.only(top: 40),
+                      padding:
+                          const EdgeInsets.only(top: 20, left: 20, right: 20),
                       child: Container(
                         height: 300.0,
-                        width: 300.0,
+                        width: double.infinity,
                         decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(10),
                           color: kSpiritedGreen,
                         ),
                         child: Center(
                           child: image == null
                               ? const Text(
                                   'No image selected',
-                                  style: TextStyle(fontSize: 20),
+                                  style: TextStyle(fontSize: 18),
                                 )
-                              : Image.file(
-                                  image!,
-                                  height: 300.0,
-                                  width: 300.0,
-                                  fit: BoxFit.cover,
+                              : ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.file(
+                                    image!,
+                                    height: 300.0,
+                                    width: double.infinity,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                         ),
                       )),

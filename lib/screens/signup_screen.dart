@@ -1,4 +1,3 @@
-
 import 'package:cropssafe/components/authentication_button.dart';
 import 'package:cropssafe/consts/constants.dart';
 import 'package:cropssafe/inner_screens/loading_manager.dart';
@@ -49,6 +48,8 @@ class _SignupScreenState extends State<SignupScreen> {
   bool _isLoading = false;
 
   void _submitFormOnRegister() async {
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => BottomBarScreen()));
     // final isValid = _formKey.currentState!.validate();
     // FocusScope.of(context).unfocus();
     //
@@ -113,299 +114,309 @@ class _SignupScreenState extends State<SignupScreen> {
                 child: Container(
                   color: kSpiritedGreen,
                   constraints: BoxConstraints(
-                    maxHeight: MediaQuery.of(context).size.height,
+                    maxHeight: MediaQuery
+                        .of(context)
+                        .size
+                        .height,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Form(
-                        key: _formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Register',
-                              style: GoogleFonts.poppins(
-                                fontSize: 32.0,
-                                fontWeight: FontWeight.w600,
-                                color: kDarkGreenColor,
-                              ),
-                            ),
-                            const SizedBox(height: 10.0),
-                            Text(
-                              'Create a new account',
-                              style: GoogleFonts.poppins(
-                                color: kGreyColor,
-                                fontSize: 16.0,
-                              ),
-                            ),
-                            const SizedBox(height: 40.0),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 20.0, right: 20.0, bottom: 15.0),
-                              child: TextFormField(
-                                textInputAction: TextInputAction.next,
-                                onEditingComplete: () => FocusScope.of(context)
-                                    .requestFocus(_emailFocusNode),
-                                keyboardType: TextInputType.name,
-                                cursorColor: kDarkGreenColor,
-                                controller: _fullNameController,
-                                validator: (value) {
-                                  if (value!.isEmpty ||
-                                      !value.contains(RegExp(r'[A-Z]')) ||
-                                      value.contains(RegExp(r'[0-9]')) ||
-                                      !value.contains(RegExp(r'[a-z]')) ||
-                                      value.contains(
-                                          RegExp(r'[!@#$%^&*()_-]'))) {
-                                    return "This Field is missing";
-                                  } else {
-                                    return null;
-                                  }
-                                },
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 40.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Form(
+                          key: _formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Register',
                                 style: GoogleFonts.poppins(
-                                  color: kDarkGreenColor,
+                                  fontSize: 32.0,
                                   fontWeight: FontWeight.w600,
-                                  fontSize: 15.0,
+                                  color: kDarkGreenColor,
                                 ),
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.all(18.0),
-                                  filled: true,
-                                  fillColor: kGinColor,
-                                  prefixIcon: Icon(
-                                    Icons.person,
-                                    size: 24.0,
-                                    color: kDarkGreenColor,
-                                  ),
-                                  hintText: 'Full Name',
-                                  hintStyle: GoogleFonts.poppins(
+                              ),
+                              const SizedBox(height: 10.0),
+                              Text(
+                                'Create a new account',
+                                style: GoogleFonts.poppins(
+                                  color: kGreyColor,
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                              const SizedBox(height: 40.0),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 20.0, right: 20.0, bottom: 15.0),
+                                child: TextFormField(
+                                  textInputAction: TextInputAction.next,
+                                  onEditingComplete: () =>
+                                      FocusScope.of(context)
+                                          .requestFocus(_emailFocusNode),
+                                  keyboardType: TextInputType.name,
+                                  cursorColor: kDarkGreenColor,
+                                  controller: _fullNameController,
+                                  validator: (value) {
+                                    if (value!.isEmpty ||
+                                        !value.contains(RegExp(r'[A-Z]')) ||
+                                        value.contains(RegExp(r'[0-9]')) ||
+                                        !value.contains(RegExp(r'[a-z]')) ||
+                                        value.contains(
+                                            RegExp(r'[!@#$%^&*()_-]'))) {
+                                      return "This Field is missing";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  style: GoogleFonts.poppins(
                                     color: kDarkGreenColor,
                                     fontWeight: FontWeight.w600,
                                     fontSize: 15.0,
                                   ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    borderSide: BorderSide(color: kGinColor),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    borderSide:
-                                        BorderSide(color: kDarkGreenColor),
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.all(18.0),
+                                    filled: true,
+                                    fillColor: kGinColor,
+                                    prefixIcon: Icon(
+                                      Icons.person,
+                                      size: 24.0,
+                                      color: kDarkGreenColor,
+                                    ),
+                                    hintText: 'Full Name',
+                                    hintStyle: GoogleFonts.poppins(
+                                      color: kDarkGreenColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 15.0,
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      borderSide: BorderSide(color: kGinColor),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      borderSide:
+                                      BorderSide(color: kDarkGreenColor),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 20.0, right: 20.0, bottom: 15.0),
-                              child: TextFormField(
-                                focusNode: _emailFocusNode,
-                                textInputAction: TextInputAction.next,
-                                onEditingComplete: () => FocusScope.of(context)
-                                    .requestFocus(_passFocusNode),
-                                keyboardType: TextInputType.emailAddress,
-                                controller: _emailTextController,
-                                validator: (value) {
-                                  if (value!.isEmpty ||
-                                      !value.contains("@") ||
-                                      !value.contains(RegExp(r'[0-9]'))) {
-                                    return "Please enter a valid Email adress";
-                                  } else {
-                                    return null;
-                                  }
-                                },
-                                style: GoogleFonts.poppins(
-                                  color: kDarkGreenColor,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 15.0,
-                                ),
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.all(18.0),
-                                  filled: true,
-                                  fillColor: kGinColor,
-                                  prefixIcon: Icon(
-                                    Icons.email,
-                                    size: 24.0,
-                                    color: kDarkGreenColor,
-                                  ),
-                                  hintText: 'Email',
-                                  hintStyle: GoogleFonts.poppins(
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 20.0, right: 20.0, bottom: 15.0),
+                                child: TextFormField(
+                                  focusNode: _emailFocusNode,
+                                  textInputAction: TextInputAction.next,
+                                  onEditingComplete: () =>
+                                      FocusScope.of(context)
+                                          .requestFocus(_passFocusNode),
+                                  keyboardType: TextInputType.emailAddress,
+                                  controller: _emailTextController,
+                                  validator: (value) {
+                                    if (value!.isEmpty ||
+                                        !value.contains("@") ||
+                                        !value.contains(RegExp(r'[0-9]'))) {
+                                      return "Please enter a valid Email adress";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  style: GoogleFonts.poppins(
                                     color: kDarkGreenColor,
                                     fontWeight: FontWeight.w600,
                                     fontSize: 15.0,
                                   ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    borderSide: BorderSide(color: kGinColor),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    borderSide:
-                                        BorderSide(color: kDarkGreenColor),
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.all(18.0),
+                                    filled: true,
+                                    fillColor: kGinColor,
+                                    prefixIcon: Icon(
+                                      Icons.email,
+                                      size: 24.0,
+                                      color: kDarkGreenColor,
+                                    ),
+                                    hintText: 'Email',
+                                    hintStyle: GoogleFonts.poppins(
+                                      color: kDarkGreenColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 15.0,
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      borderSide: BorderSide(color: kGinColor),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      borderSide:
+                                      BorderSide(color: kDarkGreenColor),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 20.0, right: 20.0, bottom: 15.0),
-                              child: TextFormField(
-                                focusNode: _passFocusNode,
-                                obscureText: _obscureText,
-                                keyboardType: TextInputType.visiblePassword,
-                                controller: _passTextController,
-                                validator: (value) {
-                                  if (value!.isEmpty ||
-                                      value.length < 7 ||
-                                      !value.contains(RegExp(r'[0-9]')) ||
-                                      !value.contains(RegExp(r'[A-Z]'))) {
-                                    return "Please enter a valid password";
-                                  } else {
-                                    return null;
-                                  }
-                                },
-                                onEditingComplete: () =>
-                                    {_submitFormOnRegister()},
-                                style: GoogleFonts.poppins(
-                                  color: kDarkGreenColor,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 15.0,
-                                ),
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.all(18.0),
-                                  filled: true,
-                                  fillColor: kGinColor,
-                                  prefixIcon: Icon(
-                                    Icons.password,
-                                    size: 24.0,
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 20.0, right: 20.0, bottom: 15.0),
+                                child: TextFormField(
+                                  focusNode: _passFocusNode,
+                                  obscureText: _obscureText,
+                                  keyboardType: TextInputType.visiblePassword,
+                                  controller: _passTextController,
+                                  validator: (value) {
+                                    if (value!.isEmpty ||
+                                        value.length < 7 ||
+                                        !value.contains(RegExp(r'[0-9]')) ||
+                                        !value.contains(RegExp(r'[A-Z]'))) {
+                                      return "Please enter a valid password";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  onEditingComplete: () =>
+                                  {_submitFormOnRegister()},
+                                  style: GoogleFonts.poppins(
                                     color: kDarkGreenColor,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15.0,
                                   ),
-                                  suffixIcon: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        _obscureText = !_obscureText;
-                                      });
-                                    },
-                                    child: Icon(
-                                      _obscureText
-                                          ? Icons.visibility
-                                          : Icons.visibility_off,
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.all(18.0),
+                                    filled: true,
+                                    fillColor: kGinColor,
+                                    prefixIcon: Icon(
+                                      Icons.password,
+                                      size: 24.0,
+                                      color: kDarkGreenColor,
+                                    ),
+                                    suffixIcon: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          _obscureText = !_obscureText;
+                                        });
+                                      },
+                                      child: Icon(
+                                        _obscureText
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
+                                        color: kDarkGreenColor,
+                                      ),
+                                    ),
+                                    hintText: 'Password',
+                                    hintStyle: GoogleFonts.poppins(
+                                      color: kDarkGreenColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 15.0,
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      borderSide: BorderSide(color: kGinColor),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      borderSide:
+                                      BorderSide(color: kDarkGreenColor),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 15.0),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'By signing you agree to our ',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w600,
                                       color: kDarkGreenColor,
                                     ),
                                   ),
-                                  hintText: 'Password',
-                                  hintStyle: GoogleFonts.poppins(
-                                    color: kDarkGreenColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 15.0,
+                                  Text(
+                                    ' Terms of use',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w600,
+                                      color: kGreyColor,
+                                    ),
                                   ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    borderSide: BorderSide(color: kGinColor),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    borderSide:
-                                        BorderSide(color: kDarkGreenColor),
-                                  ),
-                                ),
+                                ],
                               ),
-                            ),
-                            const SizedBox(height: 15.0),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'By signing you agree to our ',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 15.0,
-                                    fontWeight: FontWeight.w600,
-                                    color: kDarkGreenColor,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'and ',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w600,
+                                      color: kDarkGreenColor,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  ' Terms of use',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 15.0,
-                                    fontWeight: FontWeight.w600,
-                                    color: kGreyColor,
+                                  Text(
+                                    ' privacy notice',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w600,
+                                      color: kGreyColor,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'and ',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 15.0,
-                                    fontWeight: FontWeight.w600,
-                                    color: kDarkGreenColor,
-                                  ),
-                                ),
-                                Text(
-                                  ' privacy notice',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 15.0,
-                                    fontWeight: FontWeight.w600,
-                                    color: kGreyColor,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                        child: AuthenticationButton(
-                          label: 'Sign Up',
-                          onPressed: () {
-                            _submitFormOnRegister();
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              'Already have an account ?',
-                              style: TextStyle(
-                                  fontSize: 14.0, fontWeight: FontWeight.w600),
-                            ),
-                            TextButton(
-                              style: ButtonStyle(
-                                foregroundColor:
-                                    MaterialStateProperty.all(kDarkGreenColor),
+                                ],
                               ),
-                              onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => LoginScreen()));
-                              },
-                              child: const Text(
-                                'Login',
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                          const EdgeInsets.only(left: 20.0, right: 20.0),
+                          child: AuthenticationButton(
+                            label: 'Sign Up',
+                            onPressed: () {
+                              _submitFormOnRegister();
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                'Already have an account ?',
                                 style: TextStyle(
                                     fontSize: 14.0,
                                     fontWeight: FontWeight.w600),
                               ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
+                              TextButton(
+                                style: ButtonStyle(
+                                  foregroundColor: MaterialStateProperty.all(
+                                      kDarkGreenColor),
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => LoginScreen()));
+                                },
+                                child: const Text(
+                                  'Login',
+                                  style: TextStyle(
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
             Positioned(
-              top: 30.0,
+              top: 40.0,
               left: 20.0,
               child: CircleAvatar(
                 backgroundColor: Colors.grey.shade300,

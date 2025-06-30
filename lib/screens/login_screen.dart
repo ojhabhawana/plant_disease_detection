@@ -47,7 +47,8 @@ class _LoginScreenState extends State<LoginScreen> {
   void _submitFormOnLogin() async {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
-
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => BottomBarScreen()));
     // if (isValid) {
     //   _formKey.currentState!.save();
     //   setState(() {
@@ -117,11 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 radius: 20.0,
                 child: IconButton(
                   onPressed: () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(
-                      builder: (context) {
-                        return Home_page();
-                      },
-                    ));
+                    Navigator.pop(context);
                   },
                   icon: Icon(
                     Icons.arrow_back_ios_new,
@@ -298,28 +295,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
-                                      children: [
-                                        Checkbox(
-                                          checkColor: Colors.white,
-                                          fillColor: MaterialStateProperty.all(
-                                              kDarkGreenColor),
-                                          value: rememberMe,
-                                          onChanged: (value) {
-                                            setState(() {
-                                              rememberMe = value!;
-                                            });
-                                          },
-                                        ),
-                                        Text(
-                                          'Remember Me',
-                                          style: TextStyle(
-                                            color: kGreyColor,
-                                            fontSize: 14.0,
-                                          ),
-                                        )
-                                      ],
-                                    ),
                                     TextButton(
                                       onPressed: () {
                                         Navigator.of(context).push(

@@ -21,6 +21,7 @@ import '../inner_screens/predictionbutton.dart';
 class Home_page extends StatefulWidget {
   Home_page({Key? key}) : super(key: key);
   static const String id = 'LoginScreen';
+
   @override
   State<Home_page> createState() => _Home_pageState();
 }
@@ -28,6 +29,7 @@ class Home_page extends StatefulWidget {
 class _Home_pageState extends State<Home_page> {
   File? _image;
   String? _response;
+
   Future _pickImage(ImageSource source) async {
     try {
       final image = await ImagePicker().pickImage(source: source);
@@ -73,8 +75,8 @@ class _Home_pageState extends State<Home_page> {
           MaterialPageRoute(
             builder: (context) => PredictionPage(
               predictionclass: predictedClass,
-              confidence: confidence,image: image.path,
-              
+              confidence: confidence,
+              image: image.path,
             ),
           ));
       _response = null; // Reset the response when a new image is selected
