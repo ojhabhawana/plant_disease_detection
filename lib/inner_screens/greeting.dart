@@ -20,7 +20,7 @@ class GreetingSection extends SliverFixedExtentList {
                   ),
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(
-                        (0.092 * height), 0, 0, (0.099 * height)),
+                        (0.08* height), 0, 0, (0.099 * height)),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.start,

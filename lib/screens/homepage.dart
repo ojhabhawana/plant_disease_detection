@@ -189,7 +189,7 @@ class _Home_pageState extends State<Home_page> {
         body: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('images/bg.jpg'), fit: BoxFit.cover),
+                image: AssetImage('images/background.png'), fit: BoxFit.cover),
           ),
           child: CustomScrollView(
             slivers: [

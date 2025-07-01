@@ -31,43 +31,47 @@ class _SplashscreenState extends State<Splashscreen> {
     return Scaffold(
       body: Container(
         color: kSpiritedGreen,
-        child: Stack(
-          children: [
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 50, vertical: 150),
-              child: Image.asset(
-                "images/logo1.png",
-                fit: BoxFit.fill,
-              ),
-            ),
-            Column(
-              children: [
-                SizedBox(
-                  height: 450,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 70,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                child: Center(
+                  child: Image.asset(
+                    "images/logo1.png",
+                    fit: BoxFit.fill,
+                    height: 150,
                   ),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Crops Safe',
-                      style: GoogleFonts.sail(
-                          fontSize: 50, color: kDarkGreenColor),
-                      textAlign: TextAlign.center,
+                ),
+              ),
+              Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 70,
+                    ),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Crops Safe',
+                        style: GoogleFonts.sail(
+                            fontSize: 50, color: kDarkGreenColor),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 100),
-                SpinKitCircle(
-                  color: Color.fromARGB(255, 60, 226, 30),
-                  size: 50.0,
-                )
-              ],
-            ),
-          ],
+                  SizedBox(height: 50),
+                  SpinKitCircle(
+                    color: kDarkGreenColor,
+                    size: 50.0,
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -8,6 +8,7 @@ import 'colors.dart';
 
 class PlantHealth extends StatelessWidget {
   Conditions? temp, humid;
+
   PlantHealth({this.temp, this.humid});
 
   @override
@@ -50,7 +51,7 @@ class PlantHealth extends StatelessWidget {
                               borderRadius: BorderRadius.all(
                                 Radius.circular(100.0),
                               ),
-                              border: new Border.all(
+                              border: Border.all(
                                   width: 4,
                                   color: FitnessAppTheme.nearlyDarkBlue
                                       .withOpacity(0.2)),
@@ -71,7 +72,7 @@ class PlantHealth extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                   temp?.subText ?? '',
+                                  temp?.subText ?? '',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontFamily: FitnessAppTheme.fontName,
@@ -90,10 +91,9 @@ class PlantHealth extends StatelessWidget {
                           padding: const EdgeInsets.all(4.0),
                           child: CustomPaint(
                             painter: CurvePainter(colors: [
-                              Color(int.parse(temp?.color)),
                               HexColor("#8A98E8"),
                               HexColor("#8A98E8")
-                            ], angle: double.parse(temp?.value) * 3.6),
+                            ], angle: temp!.value * 3.6),
                             child: SizedBox(
                               width: 108,
                               height: 108,
@@ -222,7 +222,7 @@ class PlantHealth extends StatelessWidget {
                             child: Row(
                               children: <Widget>[
                                 Container(
-                                  width: double.parse(temp!.value),
+                                  width: temp!.value,
                                   height: 4,
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(colors: [

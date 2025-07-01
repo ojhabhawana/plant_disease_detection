@@ -1,6 +1,6 @@
-
 import 'package:cropssafe/consts/constants.dart';
 import 'package:cropssafe/consts/firebase_consts.dart';
+import 'package:cropssafe/inner_screens/aboutus.dart';
 import 'package:cropssafe/inner_screens/privacy.dart';
 import 'package:cropssafe/inner_screens/terms_and_conditions.dart';
 import 'package:cropssafe/screens/login_screen.dart';
@@ -36,6 +36,7 @@ class _MyprofileState extends State<Myprofile> {
   String? _email;
   String? _name;
   bool _isLoading = false;
+
   //final User? user = authInstance.currentUser;
 
   @override
@@ -131,7 +132,8 @@ class _MyprofileState extends State<Myprofile> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       TextWidget(
-                                        text: _name == null ? 'Bhawana' : _name!,
+                                        text:
+                                            _name == null ? 'Bhawana' : _name!,
                                         color: Colors.black,
                                         textSize: 16,
                                         // isTitle: true,
@@ -145,8 +147,9 @@ class _MyprofileState extends State<Myprofile> {
                                       // ),
 
                                       TextWidget(
-                                        text:
-                                            _email == null ? 'test@gmail.com' : _email!,
+                                        text: _email == null
+                                            ? 'test@gmail.com'
+                                            : _email!,
                                         color: Colors.black,
                                         textSize: 16,
                                         // isTitle: true,
@@ -180,7 +183,10 @@ class _MyprofileState extends State<Myprofile> {
                         listTile(
                           icon: Icons.add_chart,
                           title: 'About',
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => AboutUsPage()));
+                          },
                         ),
                         // listTile(
                         //   icon: user == null

@@ -86,7 +86,7 @@ class termsscreen extends StatelessWidget {
               padding:
                   EdgeInsets.only(top: 20, bottom: 20, left: 14, right: 14),
               child: Text(
-                'If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at mandala573@gmail.com.',
+                'If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at bhawanaojha@gmail.com.',
                 textAlign: TextAlign.justify,
                 style: TextStyle(fontSize: 17, fontFamily: 'Raleway'),
               ),

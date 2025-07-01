@@ -1,4 +1,3 @@
-
 int highText = 0xFFD50000;
 int highTemp = 0xFFD32F2F;
 int moderateText = 0xFFffC400;
@@ -16,17 +15,17 @@ class ApiDataModel {
 
   ApiDataModel.fromJson(Map<String, dynamic> json) {
     channel =
-        json['channel'] != null ?  Channel.fromJson(json['channel']) : null;
+        json['channel'] != null ? Channel.fromJson(json['channel']) : null;
     if (json['feeds'] != null) {
       feeds = <Feeds>[];
       json['feeds'].forEach((v) {
-        feeds!.add( Feeds.fromJson(v));
+        feeds!.add(Feeds.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  {};
+    final Map<String, dynamic> data = {};
     if (channel != null) {
       data['channel'] = channel!.toJson();
     }
@@ -121,6 +120,7 @@ class Feeds {
     return data;
   }
 }
+
 class Conditions {
   var icon;
   var name;
@@ -128,11 +128,6 @@ class Conditions {
   var subText;
   var color;
   var subColor;
-  Conditions(
-      {icon,
-      name,
-      value,
-      subText,
-      color,
-      subColor});
+
+  Conditions({icon, name, value, subText, color, subColor});
 }

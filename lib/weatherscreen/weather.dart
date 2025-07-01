@@ -41,8 +41,9 @@ class _wetherState extends State<wether> {
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: StreamBuilder(
-            stream: Stream.periodic(Duration(seconds: 5)).asyncMap(
-                (i) => _fetchData()), // i is null here (check periodic docs)
+            stream: Stream.periodic(Duration(seconds: 2))
+                .asyncMap((i) => _fetchData()),
+            // i is null here (check periodic docs)
 
             builder: (context, snapshot) {
               if (snapshot.hasError) {
@@ -71,87 +72,103 @@ class _wetherState extends State<wether> {
                 case ConnectionState.done:
                   return Text('We are Done');
                 default:
-                  return Column(children: [
-                    SizedBox(
-                      height: 5,
-                    ),
-                    // PlantHealth(
-                    //   temp: temp,
-                    //   humid: humid,
-                    // ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16, top: 16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
+                  return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MoistureView(
+                          moist: moist,
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(
+                            15,
+                          ),
+                          child: Text(
                             'Classified Disease',
                             style: TextStyle(fontSize: 24),
                           ),
-                        ],
-                      ),
-                    ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          FeedsWidget(
-                            pimage: 'assets/black.jpg',
-                            name: 'Apple Black Rot',
-                            onpressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => AppleBlack()));
-                            },
+                        ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: GridView.count(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 15.0,
+                            mainAxisSpacing: 15.0,
+                            padding: const EdgeInsets.only(right: 15.0),
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            children: [
+                              FeedsWidget(
+                                pimage: 'assets/black.jpg',
+                                name: 'Apple Black Rot',
+                                onpressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (context) => AppleBlack()),
+                                  );
+                                },
+                              ),
+                              FeedsWidget(
+                                pimage: 'assets/cedar.jpg',
+                                name: 'Apple Cedar Rust',
+                                onpressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (context) => AppleCedarRust()),
+                                  );
+                                },
+                              ),
+                              FeedsWidget(
+                                pimage: 'assets/scab.jpg',
+                                name: 'Apple Scab',
+                                onpressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (context) => AppleScab()),
+                                  );
+                                },
+                              ),
+                              FeedsWidget(
+                                pimage: 'assets/health.png',
+                                name: 'Healthy',
+                                onpressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (context) => Healthy()),
+                                  );
+                                },
+                              ),
+                              FeedsWidget(
+                                pimage: 'assets/16.jpg',
+                                name: 'Potato Early Blight',
+                                onpressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            PotatoEarlyBlight()),
+                                  );
+                                },
+                              ),
+                              FeedsWidget(
+                                pimage: 'assets/17.jpg',
+                                name: 'Potato Late Blight',
+                                onpressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            PotatoLateBlight()),
+                                  );
+                                },
+                              ),
+                            ],
                           ),
-                          FeedsWidget(
-                            onpressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => AppleCedarRust()));
-                            },
-                            pimage: 'assets/cedar.jpg',
-                            name: 'Apple Cedar Rust',
-                          ),
-                          FeedsWidget(
-                            onpressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => AppleScab()));
-                            },
-                            pimage: 'assets/scab.jpg',
-                            name: 'Apple Scab',
-                          ),
-                          FeedsWidget(
-                              onpressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => Healthy()));
-                              },
-                              pimage: 'assets/health.png',
-                              name: 'Healthy'),
-                          FeedsWidget(
-                            onpressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => PotatoEarlyBlight()));
-                            },
-                            pimage: 'assets/16.jpg',
-                            name: 'Potato Early Blight',
-                          ),
-                          FeedsWidget(
-                            onpressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => PotatoLateBlight()));
-                            },
-                            pimage: 'assets/17.jpg',
-                            name: 'Potato Late Blight',
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    MoistureView(
-                      moist: moist,
-                    ),
-                  ]);
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                      ]);
               }
             },
           ),
@@ -171,67 +188,69 @@ class _wetherState extends State<wether> {
       print(dataModelApi!.feeds![0].field1);
       print("Successfully fetched and parsed Sensor Data");
 
-      //Temperature
-
-      if (double.parse(dataModelApi!.feeds![0].field1!).toInt() >= 18 &&
-          double.parse(dataModelApi!.feeds![0].field1!).toInt() <= 24) {
-        temp = Conditions();
-        temp.icon = 'assets/temperature.png';
-        temp.name = 'Temperature';
-        temp.value = '${double.parse(dataModelApi!.feeds![0].field1!).toInt()}';
-        temp.subText = 'Normal';
-        temp.color = '$normalTemp';
-        temp.subColor = '$normalText';
-      } else if (double.parse(dataModelApi!.feeds![0].field1!).toInt() > 24 &&
-          double.parse(dataModelApi!.feeds![0].field1!).toInt() <= 35) {
-        temp = Conditions();
-        temp.icon = 'assets/temperature.png';
-        temp.name = 'Temperature';
-        temp.value = '${double.parse(dataModelApi!.feeds![0].field1!).toInt()}';
-        temp.subText = 'Moderate';
-        temp.color = '$moderateTemp';
-        temp.subColor = '$moderateText';
-      } else if (double.parse(dataModelApi!.feeds![0].field1!).toInt() > 35) {
-        temp = Conditions();
-        temp.icon = 'assets/temperature.png';
-        temp.name = 'Temperature';
-        temp.value = '${double.parse(dataModelApi!.feeds![0].field1!).toInt()}';
-        temp.subText = 'Critical';
-        temp.color = '$highTemp';
-        temp.subColor = '$highText';
-      }
-
-      //Humidity
-
-      if (double.parse(dataModelApi!.feeds![0].field2!).toInt() >= 50 &&
-          double.parse(dataModelApi!.feeds![0].field2!).toInt() <= 70) {
-        humid = Conditions();
-        humid.icon = 'assets/humidity.png';
-        humid.name = 'Humidity';
-        humid.value =
-            '${double.parse(dataModelApi!.feeds![0].field2!).toInt()}';
-        humid.subText = 'Normal';
-        humid.color = '$lightBlueHumidity';
-        humid.subColor = '$normalText';
-      } else if (double.parse(dataModelApi!.feeds![0].field2!).toInt() < 50) {
-        humid = Conditions();
-        humid.icon = 'assets/humidity.png';
-        humid.name = 'Humidity';
-        humid.value =
-            '${double.parse(dataModelApi!.feeds![0].field2!).toInt()}';
-        humid.subText = 'low';
-        humid.color = '$lightBlueHumidity';
-        humid.subColor = '$moderateText';
-      } else if (double.parse(dataModelApi!.feeds![0].field2!).toInt() > 70) {
-        humid = Conditions();
-        humid.icon = 'assets/humidity.png';
-        humid.name = 'Humidity';
-        humid.value =
-            '${double.parse(dataModelApi!.feeds![0].field2!).toInt()}';
-        humid.subText = 'High';
-        humid.color = '$lightBlueHumidity';
-        humid.subColor = '$highText';
-      }
+      // //Temperature
+      // temp = Conditions();
+      // temp.icon = 'assets/temperature.png';
+      // temp.name = 'Temperature';
+      // temp.value = 22.0;
+      // temp.subText = 'Normal';
+      // temp.color = '$normalTemp';
+      // temp.subColor = '$normalText';
+      // if (double.parse(dataModelApi!.feeds![0].field1!).toInt() >= 18 &&
+      //     double.parse(dataModelApi!.feeds![0].field1!).toInt() <= 24) {
+      // } else if (double.parse(dataModelApi!.feeds![0].field1!).toInt() > 24 &&
+      //     double.parse(dataModelApi!.feeds![0].field1!).toInt() <= 35) {
+      //   temp = Conditions();
+      //   temp.icon = 'assets/temperature.png';
+      //   temp.name = 'Temperature';
+      //   temp.value = 20;
+      //   temp.subText = 'Moderate';
+      //   temp.color = '$moderateTemp';
+      //   temp.subColor = '$moderateText';
+      // } else if (double.parse(dataModelApi!.feeds![0].field1!).toInt() > 35) {
+      //   temp = Conditions();
+      //   temp.icon = 'assets/temperature.png';
+      //   temp.name = 'Temperature';
+      //   temp.value = '35';
+      //   temp.subText = 'Critical';
+      //   temp.color = '$highTemp';
+      //   temp.subColor = '$highText';
+      // }
+      //
+      // //Humidity
+      // humid = Conditions();
+      // humid.icon = 'assets/humidity.png';
+      // humid.name = 'Humidity';
+      // humid.value = '55';
+      // humid.subText = 'Normal';
+      // humid.color = '$lightBlueHumidity';
+      // humid.subColor = '$normalText';
+      // if (double.parse(dataModelApi!.feeds![0].field2!).toInt() >= 50 &&
+      //     double.parse(dataModelApi!.feeds![0].field2!).toInt() <= 70) {
+      //   humid = Conditions();
+      //   humid.icon = 'assets/humidity.png';
+      //   humid.name = 'Humidity';
+      //   humid.value = '55';
+      //   humid.subText = 'Normal';
+      //   humid.color = '$lightBlueHumidity';
+      //   humid.subColor = '$normalText';
+      // } else if (double.parse(dataModelApi!.feeds![0].field2!).toInt() < 50) {
+      //   humid = Conditions();
+      //   humid.icon = 'assets/humidity.png';
+      //   humid.name = 'Humidity';
+      //   humid.value = '30';
+      //   humid.subText = 'low';
+      //   humid.color = '$lightBlueHumidity';
+      //   humid.subColor = '$moderateText';
+      // } else if (double.parse(dataModelApi!.feeds![0].field2!).toInt() > 70) {
+      //   humid = Conditions();
+      //   humid.icon = 'assets/humidity.png';
+      //   humid.name = 'Humidity';
+      //   humid.value = '80';
+      //   humid.subText = 'High';
+      //   humid.color = '$lightBlueHumidity';
+      //   humid.subColor = '$highText';
+      // }
 
       //Moisture
 
