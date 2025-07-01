@@ -8,22 +8,25 @@ class PredictionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 15),
-      padding: EdgeInsets.symmetric(horizontal: 20),
+    return Center(
       child: ElevatedButton(
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-            (states) => kMain,
+            (states) => kDarkGreenColor,
           ),
+          shape: WidgetStatePropertyAll(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
           padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
             const EdgeInsets.all(15), // Set padding
           ),
         ),
         onPressed: onPressed,
-        child: Text(
-          'Predict',
-          style: TextStyle(color: Colors.white, fontSize: 16),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 50.0),
+          child: Text(
+            'Predict',
+            style: TextStyle(color: Colors.white, fontSize: 16),
+          ),
         ),
       ),
     );

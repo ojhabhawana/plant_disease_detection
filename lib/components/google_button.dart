@@ -46,7 +46,7 @@ class GoogleButton extends StatelessWidget {
           _googleSignIn(context);
         },
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Image.asset(
               'assets/googleLogo.png',

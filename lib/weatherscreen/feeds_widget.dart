@@ -1,3 +1,4 @@
+import 'package:cropssafe/constants.dart';
 import 'package:flutter/material.dart';
 
 class FeedsWidget extends StatelessWidget {
@@ -15,17 +16,16 @@ class FeedsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.only( left: 15, right: 5),
+      padding: const EdgeInsets.only(left: 15, right: 5),
       child: GestureDetector(
         onTap: onpressed,
         child: Container(
           height: 200,
           width: 200,
-         decoration: BoxDecoration(
-           borderRadius: BorderRadius.circular(10.0),
-           color: Theme.of(context).cardColor,
-         ),
-          
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.0),
+            color: kSpiritedGreen.withValues(alpha: .2),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

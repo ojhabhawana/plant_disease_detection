@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cropssafe/consts/alertbox.dart';
 import 'package:cropssafe/consts/constants.dart';
 import 'package:cropssafe/inner_screens/greeting.dart';
 import 'package:cropssafe/inner_screens/image.dart';
@@ -62,7 +63,7 @@ class _Home_pageState extends State<Home_page> {
 
     var response = await request.send();
     if (response.statusCode == 200) {
-      print('Image uploaded successfully');
+      showAlert("Image uploaded successfully");
       var responseBody = await response.stream.bytesToString();
       print(responseBody);
       var jsonResponse = json.decode(responseBody);
@@ -86,127 +87,150 @@ class _Home_pageState extends State<Home_page> {
         print('Confidence: $confidence');
       });
     } else {
-      print('Image upload failed with status: ${response.statusCode}');
+      showAlert('Image upload failed');
     }
   }
 
   void predictImage() {
     if (_image != null) {
+      showAlert(' Image selected');
       sendImageToServer(_image!);
     } else {
-      print('No image selected');
+      showAlert('No image selected');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return SafeArea(
-      child: Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
-        floatingActionButton: SpeedDial(
-          backgroundColor: kMain,
-          icon: Icons.camera_alt,
-          spacing: 10,
-          children: [
-            SpeedDialChild(
-                child: FaIcon(
-                  FontAwesomeIcons.file,
-                  color: kWhite,
-                ),
-                label: "Choose image",
-                backgroundColor: kMain,
-                onTap: () {
-                  _pickImage(ImageSource.gallery);
-                }
-                // async {
-                //   late double _confidence;
-                //   await classifier.getDisease(ImageSource.gallery).then((value) {
-                //     _disease = Disease(
-                //         name: value![0]["label"],
-                //         imagePath: classifier.imageFile.path);
-
-                //     _confidence = value[0]['confidence'];
-                //   });
-                //   // Check confidence
-                //   if (_confidence > 0.8) {
-                //     // Set disease for Disease Service
-                //     _diseaseService.setDiseaseValue(_disease);
-
-                //     // Save disease
-                //     _hiveService.addDisease(_disease);
-
-                //     Navigator.restorablePushNamed(
-                //       context,
-                //       Suggestions.routeName,
-                //     );
-                //   } else {
-                //     // Display unsure message
-
-                //   }
-                // },
-                ),
-            SpeedDialChild(
-                child: FaIcon(
-                  FontAwesomeIcons.camera,
-                  color: kWhite,
-                ),
-                label: "Take photo",
-                backgroundColor: kMain,
-                onTap: () {
-                  _pickImage(ImageSource.camera);
-                } //() async {
-                //   late double _confidence;
-
-                //   await classifier.getDisease(ImageSource.camera).then((value) {
-                //     _disease = Disease(
-                //         name: value![0]["label"],
-                //         imagePath: classifier.imageFile.path);
-
-                //     _confidence = value[0]['confidence'];
-                //   });
-
-                //   // Check confidence
-                //   if (_confidence > 0.8) {
-                //     // Set disease for Disease Service
-                //     _diseaseService.setDiseaseValue(_disease);
-
-                //     // Save disease
-                //     _hiveService.addDisease(_disease);
-
-                //     Navigator.restorablePushNamed(
-                //       context,
-                //       Suggestions.routeName,
-                //     );
-                //   } else {
-                //     // Display unsure message
-
-                //   }
-                // },
-                ),
-          ],
-        ),
-        body: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('images/background.png'), fit: BoxFit.cover),
-          ),
-          child: CustomScrollView(
-            slivers: [
-              GreetingSection(size.height * 0.2),
-              TitleSection('Instructions', size.height * 0.066),
-              InstructionsSection(size),
-              ImageSection(
-                _image,
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      extendBody: true,
+      backgroundColor: kFoamColor,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
+      floatingActionButton: SpeedDial(
+        backgroundColor: kDarkGreenColor,
+        icon: Icons.camera_alt,
+        spacing: 10,
+        children: [
+          SpeedDialChild(
+              child: FaIcon(
+                FontAwesomeIcons.file,
+                color: kWhite,
               ),
-              SliverToBoxAdapter(
-                child: PredictionButton(
+              label: "Choose image",
+              backgroundColor: kMain,
+              onTap: () {
+                _pickImage(ImageSource.gallery);
+              }
+              // async {
+              //   late double _confidence;
+              //   await classifier.getDisease(ImageSource.gallery).then((value) {
+              //     _disease = Disease(
+              //         name: value![0]["label"],
+              //         imagePath: classifier.imageFile.path);
+
+              //     _confidence = value[0]['confidence'];
+              //   });
+              //   // Check confidence
+              //   if (_confidence > 0.8) {
+              //     // Set disease for Disease Service
+              //     _diseaseService.setDiseaseValue(_disease);
+
+              //     // Save disease
+              //     _hiveService.addDisease(_disease);
+
+              //     Navigator.restorablePushNamed(
+              //       context,
+              //       Suggestions.routeName,
+              //     );
+              //   } else {
+              //     // Display unsure message
+
+              //   }
+              // },
+              ),
+          SpeedDialChild(
+              child: FaIcon(
+                FontAwesomeIcons.camera,
+                color: kWhite,
+              ),
+              label: "Take photo",
+              backgroundColor: kMain,
+              onTap: () {
+                _pickImage(ImageSource.camera);
+              } //() async {
+              //   late double _confidence;
+
+              //   await classifier.getDisease(ImageSource.camera).then((value) {
+              //     _disease = Disease(
+              //         name: value![0]["label"],
+              //         imagePath: classifier.imageFile.path);
+
+              //     _confidence = value[0]['confidence'];
+              //   });
+
+              //   // Check confidence
+              //   if (_confidence > 0.8) {
+              //     // Set disease for Disease Service
+              //     _diseaseService.setDiseaseValue(_disease);
+
+              //     // Save disease
+              //     _hiveService.addDisease(_disease);
+
+              //     Navigator.restorablePushNamed(
+              //       context,
+              //       Suggestions.routeName,
+              //     );
+              //   } else {
+              //     // Display unsure message
+
+              //   }
+              // },
+              ),
+        ],
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          GreetingSection(height: size.height * 0.18),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Instruction",
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'SFBold',
+                      color: kDarkGreenColor),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                InstructionsSection(),
+                SizedBox(
+                  height: 20,
+                ),
+                ImageSection(
+                  image: _image,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                PredictionButton(
                   onPressed: predictImage,
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

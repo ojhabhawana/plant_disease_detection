@@ -91,281 +91,222 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: kSpiritedGreen,
-      child: LoadingManager(
-        isLoading: _isLoading,
-        child: Stack(
-          alignment: Alignment.bottomRight,
-          fit: StackFit.expand,
-          children: [
-            // First Child in the stack
+    final size = MediaQuery.of(context).size;
 
-            ClipPath(
-              clipper: ImageClipper(),
-              child: Image.asset(
-                'images/leaves.jpg',
-                alignment: Alignment.topCenter,
-                fit: BoxFit.fitWidth,
+    return Scaffold(
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Container(
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(40),
+                  bottomRight: Radius.circular(40),
+                ),
+              ),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(40),
+                  bottomRight: Radius.circular(40),
+                ),
+                child: Stack(
+                  children: [
+                    Center(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 50,
+                          ),
+                          Image.asset(
+                            'images/logo1.png',
+                            fit: BoxFit.cover,
+                            height: size.height * 0.1,
+                            width: size.height * 0.1,
+                          ),
+                          Text(
+                            'Crops Safe',
+                            style: GoogleFonts.sahitya(
+                                fontSize: 50, color: kDarkGreenColor),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: size.height * 0.35,
+                      color: Colors.white70.withOpacity(0.35),
+                    )
+                  ],
+                ),
               ),
             ),
 
+            // Back Button
             Positioned(
-              top: 30.0,
-              left: 20.0,
+              top: 16,
+              left: 16,
               child: CircleAvatar(
-                backgroundColor: Colors.white,
-                radius: 20.0,
+                backgroundColor: kDarkGreenColor,
+                radius: 22.0,
                 child: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
+                  onPressed: () => Navigator.pop(context),
                   icon: Icon(
                     Icons.arrow_back_ios_new,
-                    color: kDarkGreenColor,
-                    size: 24.0,
+                    color: Colors.white,
+                    size: 20.0,
                   ),
                 ),
               ),
             ),
 
-            // Second Child in the stack
-            Positioned(
-              height: MediaQuery.of(context).size.height * 0.67,
-              width: MediaQuery.of(context).size.width,
-              child: Scaffold(
-                body: SingleChildScrollView(
-                  child: Container(
-                    color: kSpiritedGreen,
-                    constraints: BoxConstraints(
-                      maxHeight: MediaQuery.of(context).size.height * 0.67,
-                      maxWidth: MediaQuery.of(context).size.width,
-                    ),
+            // Form Container
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                height: size.height * 0.7,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+                decoration: BoxDecoration(
+                  color: kSpiritedGreen,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(32),
+                    topRight: Radius.circular(32),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 12,
+                      offset: Offset(0, -6),
+                    )
+                  ],
+                ),
+                child: LoadingManager(
+                  isLoading: _isLoading,
+                  child: SingleChildScrollView(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        // First Column
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Welcome Back',
-                              style: GoogleFonts.poppins(
-                                fontSize: 32.0,
-                                fontWeight: FontWeight.w600,
-                                color: kDarkGreenColor,
+                        Center(
+                          child: Column(
+                            children: [
+                              Text(
+                                'Welcome Back',
+                                style: GoogleFonts.sahitya(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
+                                  color: kDarkGreenColor,
+                                ),
                               ),
-                            ),
-                            Text(
-                              'Login to your account',
-                              style: GoogleFonts.poppins(
-                                color: kGreyColor,
-                                fontSize: 15.0,
+                              const SizedBox(height: 8),
+                              Text(
+                                'Login to your account',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 14,
+                                  color: kGreyColor,
+                                ),
                               ),
-                            )
-                          ],
+                            ],
+                          ),
                         ),
+                        const SizedBox(height: 32),
 
-                        // Second Column
+                        // Form
                         Form(
                           key: _formKey,
                           child: Column(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 20.0, right: 20.0, bottom: 15.0),
-                                child: TextFormField(
-                                  textInputAction: TextInputAction.next,
-                                  onEditingComplete: () =>
-                                      FocusScope.of(context)
-                                          .requestFocus(_passFocusNode),
-                                  cursorColor: kDarkGreenColor,
-                                  controller: _emailTextController,
-                                  onChanged: (value) => email = value,
-                                  validator: (value) {
-                                    if (value!.isEmpty ||
-                                        !value.contains('@') ||
-                                        !value.contains(RegExp(r'[0-9]'))) {
-                                      return 'Please enter a valid email address';
-                                    } else {
-                                      return null;
-                                    }
-                                  },
-                                  style: GoogleFonts.poppins(
-                                    color: kDarkGreenColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 15.0,
-                                  ),
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.all(18.0),
-                                    filled: true,
-                                    fillColor: kGinColor,
-                                    prefixIcon: Icon(
-                                      Icons.person,
-                                      size: 24.0,
-                                      color: kDarkGreenColor,
-                                    ),
-                                    hintText: 'Email',
-                                    hintStyle: GoogleFonts.poppins(
-                                      color: kDarkGreenColor,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 15.0,
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      borderSide: BorderSide(color: kGinColor),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      borderSide:
-                                          BorderSide(color: kDarkGreenColor),
-                                    ),
-                                  ),
-                                ),
+                              _buildInputField(
+                                label: 'Email',
+                                controller: _emailTextController,
+                                icon: Icons.email,
+                                keyboardType: TextInputType.emailAddress,
+                                validator: (value) {
+                                  if (value == null ||
+                                      value.isEmpty ||
+                                      !value.contains('@')) {
+                                    return 'Enter a valid email';
+                                  }
+                                  return null;
+                                },
+                                onFieldSubmitted: (_) => FocusScope.of(context)
+                                    .requestFocus(_passFocusNode),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 20.0, right: 20.0, bottom: 15.0),
-                                child: TextFormField(
-                                  focusNode: _passFocusNode,
-                                  obscureText: _obscureText,
-                                  keyboardType: TextInputType.visiblePassword,
-                                  controller: _passTextController,
-                                  validator: (value) {
-                                    if (value!.isEmpty ||
-                                        value.length < 7 ||
-                                        !value.contains(RegExp(r'[0-9]')) ||
-                                        !value.contains(RegExp(r'[A-Z]'))) {
-                                      return "Please enter a valid password";
-                                    } else {
-                                      return null;
-                                    }
-                                  },
-                                  onEditingComplete: () =>
-                                      {_submitFormOnLogin()},
-                                  style: GoogleFonts.poppins(
+                              const SizedBox(height: 16),
+                              _buildInputField(
+                                label: 'Password',
+                                controller: _passTextController,
+                                icon: Icons.lock,
+                                focusNode: _passFocusNode,
+                                obscureText: _obscureText,
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _obscureText
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
                                     color: kDarkGreenColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 15.0,
                                   ),
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.all(18.0),
-                                    filled: true,
-                                    fillColor: kGinColor,
-                                    prefixIcon: Icon(
-                                      Icons.password,
-                                      size: 24.0,
-                                      color: kDarkGreenColor,
-                                    ),
-                                    suffixIcon: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          _obscureText = !_obscureText;
-                                        });
-                                      },
-                                      child: Icon(
-                                        _obscureText
-                                            ? Icons.visibility
-                                            : Icons.visibility_off,
-                                        color: kDarkGreenColor,
-                                      ),
-                                    ),
-                                    hintText: 'Password',
-                                    hintStyle: GoogleFonts.poppins(
-                                      color: kDarkGreenColor,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 15.0,
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      borderSide: BorderSide(color: kGinColor),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      borderSide:
-                                          BorderSide(color: kDarkGreenColor),
-                                    ),
-                                  ),
+                                  onPressed: () => setState(
+                                      () => _obscureText = !_obscureText),
                                 ),
+                                validator: (value) {
+                                  if (value == null ||
+                                      value.length < 6 ||
+                                      !RegExp(r'[A-Z]').hasMatch(value) ||
+                                      !RegExp(r'[0-9]').hasMatch(value)) {
+                                    return 'Enter a strong password';
+                                  }
+                                  return null;
+                                },
+                                onFieldSubmitted: (_) => _submitFormOnLogin(),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ForgetPasswordScreen()));
-                                      },
-                                      style: ButtonStyle(
-                                        foregroundColor:
-                                            MaterialStateProperty.all(
-                                                kDarkGreenColor),
-                                      ),
-                                      child: const Text(
-                                        'Forgot Password ?',
-                                      ),
-                                    )
-                                  ],
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: TextButton(
+                                  onPressed: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => ForgetPasswordScreen()),
+                                  ),
+                                  child: Text(
+                                    'Forgot Password?',
+                                    style: TextStyle(color: kDarkGreenColor),
+                                  ),
                                 ),
                               ),
                             ],
                           ),
                         ),
 
-                        // Third Column
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 20.0,
-                            right: 20.0,
-                            bottom: 20.0,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              AuthenticationButton(
-                                  label: 'Log In',
-                                  onPressed: () {
-                                    _submitFormOnLogin();
-                                  }),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              GoogleButton(),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 10.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      'Don\'t have an account ?',
-                                      style: TextStyle(fontSize: 14.0),
-                                    ),
-                                    TextButton(
-                                      style: ButtonStyle(
-                                        foregroundColor:
-                                            MaterialStateProperty.all(
-                                                kDarkGreenColor),
-                                      ),
-                                      onPressed: () {
-                                        Navigator.pushNamed(
-                                            context, SignupScreen.id);
-                                      },
-                                      child: const Text(
-                                        'Sign up',
-                                        style: TextStyle(fontSize: 14.0),
-                                      ),
-                                    )
-                                  ],
+                        const SizedBox(height: 24),
+
+                        // Buttons
+                        AuthenticationButton(
+                          label: 'Log In',
+                          onPressed: _submitFormOnLogin,
+                        ),
+                        const SizedBox(height: 12),
+                        GoogleButton(),
+                        const SizedBox(height: 20),
+
+                        // Signup link
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("Don't have an account?"),
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pushNamed(context, SignupScreen.id),
+                              child: Text(
+                                'Sign Up',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: kDarkGreenColor,
                                 ),
-                              )
-                            ],
-                          ),
+                              ),
+                            )
+                          ],
                         ),
                       ],
                     ),
@@ -374,6 +315,42 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildInputField({
+    required String label,
+    required TextEditingController controller,
+    required IconData icon,
+    FocusNode? focusNode,
+    TextInputType keyboardType = TextInputType.text,
+    bool obscureText = false,
+    Widget? suffixIcon,
+    String? Function(String?)? validator,
+    void Function(String)? onFieldSubmitted,
+  }) {
+    return TextFormField(
+      controller: controller,
+      focusNode: focusNode,
+      keyboardType: keyboardType,
+      obscureText: obscureText,
+      validator: validator,
+      onFieldSubmitted: onFieldSubmitted,
+      style: GoogleFonts.poppins(
+        color: kDarkGreenColor,
+        fontWeight: FontWeight.w500,
+      ),
+      decoration: InputDecoration(
+        labelText: label,
+        filled: true,
+        fillColor: kGinColor,
+        prefixIcon: Icon(icon, color: kDarkGreenColor),
+        suffixIcon: suffixIcon,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
         ),
       ),
     );

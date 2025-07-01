@@ -37,7 +37,7 @@ class _wetherState extends State<wether> {
     return SafeArea(
       child: Container(
         height: MediaQuery.of(context).size.height,
-        color: kSpiritedGreen,
+        color: kFoamColor,
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: StreamBuilder(

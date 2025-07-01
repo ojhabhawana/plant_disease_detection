@@ -14,8 +14,11 @@ class LandingPage extends StatelessWidget {
         bodyPadding: EdgeInsets.only(left: 10, right: 10, top: 80, bottom: 0),
         pages: [
           PageViewModel(
-            titleWidget: Text('Crops Safe',
-                style: GoogleFonts.sail(fontSize: 40, color: kDarkGreenColor)),
+            titleWidget: Text(
+              'Crops Safe',
+              style: GoogleFonts.sahitya(fontSize: 40, color: kDarkGreenColor),
+              textAlign: TextAlign.center,
+            ),
             bodyWidget: Text(
               'An All-in-One App to help farmers and make farming a lot easier.',
               style: GoogleFonts.poppins(color: kGreyColor),
@@ -29,8 +32,10 @@ class LandingPage extends StatelessWidget {
                 pageColor: kSpiritedGreen, imagePadding: EdgeInsets.zero),
           ),
           PageViewModel(
-            titleWidget: Text('Crops Safe',
-                style: GoogleFonts.sail(fontSize: 40, color: kDarkGreenColor)),
+            titleWidget: Text(
+              'Crops Safe',
+              style: GoogleFonts.sahitya(fontSize: 40, color: kDarkGreenColor),
+            ),
             bodyWidget: Text(
               'Detect defects in crops so necessary care can be taken.',
               style: GoogleFonts.poppins(color: kGreyColor),
@@ -43,8 +48,10 @@ class LandingPage extends StatelessWidget {
             decoration: PageDecoration(pageColor: kSpiritedGreen),
           ),
           PageViewModel(
-            titleWidget: Text('Crops Safe',
-                style: GoogleFonts.sail(fontSize: 40, color: kDarkGreenColor)),
+            titleWidget: Text(
+              'Crops Safe',
+              style: GoogleFonts.sahitya(fontSize: 40, color: kDarkGreenColor),
+            ),
             bodyWidget: Text(
               'Smart Agriculture gives live crop condition updates.',
               style: GoogleFonts.poppins(color: kGreyColor),
@@ -62,21 +69,25 @@ class LandingPage extends StatelessWidget {
         onSkip: () => Navigator.push(
             context, MaterialPageRoute(builder: (_) => LoginScreen())),
         showSkipButton: true,
-        skip: Text("Skip",
-            style: TextStyle(
-                fontWeight: FontWeight.w600,
-                color: kDarkGreenColor,
-                fontSize: 16)),
+        skip: Text(
+          "Skip",
+          style: GoogleFonts.sahitya(
+              fontSize: 16,
+              color: kDarkGreenColor,
+              fontWeight: FontWeight.bold),
+        ),
         next: Icon(
           Icons.arrow_forward,
           color: kDarkGreenColor,
           size: 20,
         ),
-        done: Text("Login",
-            style: TextStyle(
-                fontWeight: FontWeight.w600,
-                color: kDarkGreenColor,
-                fontSize: 16)),
+        done: Text(
+          "Login",
+          style: GoogleFonts.sahitya(
+              fontSize: 16,
+              color: kDarkGreenColor,
+              fontWeight: FontWeight.bold),
+        ),
         dotsDecorator: DotsDecorator(
           activeColor: kDarkGreenColor,
           color: Colors.white24,

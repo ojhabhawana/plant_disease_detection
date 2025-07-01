@@ -50,19 +50,18 @@ class _SplashscreenState extends State<Splashscreen> {
               Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 70,
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Crops Safe',
-                        style: GoogleFonts.sail(
-                            fontSize: 50, color: kDarkGreenColor),
-                        textAlign: TextAlign.center,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 70,
                       ),
-                    ),
-                  ),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Crops Safe',
+                          style: GoogleFonts.sahitya(
+                              fontSize: 50, color: kDarkGreenColor),
+                          textAlign: TextAlign.center,
+                        ),
+                      )),
                   SizedBox(height: 50),
                   SpinKitCircle(
                     color: kDarkGreenColor,

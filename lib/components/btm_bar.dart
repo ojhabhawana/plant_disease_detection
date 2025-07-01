@@ -20,6 +20,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
     wether(),
     Myprofile(),
   ];
+
   void _selectedpages(index) {
     setState(() {
       _selectedIndex = index;
@@ -32,7 +33,9 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
       backgroundColor: kMain,
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-      selectedItemColor: kMain,  
+          backgroundColor: kMain,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: kFoamColor.withValues(alpha: .8),
           type: BottomNavigationBarType.fixed,
           //showSelectedLabels: false,
           //showUnselectedLabels: false,
@@ -40,18 +43,14 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
           currentIndex: _selectedIndex,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Icon(
-                    _selectedIndex == 0 ? Icons.home : Icons.home),
+                icon: Icon(_selectedIndex == 0 ? Icons.home : Icons.home),
                 label: 'Home'),
             BottomNavigationBarItem(
-                icon: Icon(_selectedIndex == 1
-                    ? Icons.category
-                    : Icons.category),
-                label: 'Categories'),
+                icon: Icon(_selectedIndex == 1 ? Icons.category : Icons.cloud),
+                label: 'Weather'),
             BottomNavigationBarItem(
-                icon: Icon(
-                    _selectedIndex == 3 ? Icons.person : Icons.person),
-                label: 'User')
+                icon: Icon(_selectedIndex == 3 ? Icons.person : Icons.person),
+                label: 'Profile')
           ]),
     );
   }
